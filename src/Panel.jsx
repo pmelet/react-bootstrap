@@ -10,6 +10,7 @@ var Panel = React.createClass({
   mixins: [BootstrapMixin, CollapsableMixin],
 
   propTypes: {
+    collapsable: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
     header: React.PropTypes.node,
     footer: React.PropTypes.node,
@@ -23,22 +24,21 @@ var Panel = React.createClass({
     };
   },
 
-  handleSelect: function (e) {
-    if (this.props.onSelect) {
-      this._isChanging = true;
-      this.props.onSelect(this.props.eventKey);
-      this._isChanging = false;
+  handleSelect: function(e){
+    if(this.props.onSelect) {
+      this.props.onSelect(e, this.props.eventKey)
+    } else {
+      this.handleClickEvent(e);
+      this.handleToggle();
     }
-
-    e.preventDefault();
-
-    this.setState({
-      expanded: !this.state.expanded
-    });
   },
 
-  shouldComponentUpdate: function () {
-    return !this._isChanging;
+  handleClickEvent: function(e){
+    e.preventDefault();
+  },
+
+  handleToggle: function(){
+    this.setState({expanded:!this.state.expanded});
   },
 
   getCollapsableDimensionValue: function () {
@@ -52,6 +52,7 @@ var Panel = React.createClass({
 
     return this.refs.panel.getDOMNode();
   },
+
 
   render: function () {
     var classes = this.getBsClassSet();
@@ -69,7 +70,11 @@ var Panel = React.createClass({
 
   renderCollapsableBody: function () {
     return (
-      <div className={classSet(this.getCollapsableClassSet('panel-collapse'))} id={this.props.id} ref="panel">
+      <div
+        className={classSet(this.getCollapsableClassSet('panel-collapse'))}
+        id={this.props.id}
+        ref="panel"
+        aria-expanded={this.isExpanded() ? 'true' : 'false'}>
         {this.renderBody()}
       </div>
     );
@@ -168,6 +173,7 @@ var Panel = React.createClass({
       <a
         href={'#' + (this.props.id || '')}
         className={this.isExpanded() ? null : 'collapsed'}
+        aria-expanded={this.isExpanded() ? 'true' : 'false'}
         onClick={this.handleSelect}>
         {header}
       </a>

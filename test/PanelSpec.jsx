@@ -113,8 +113,24 @@ describe('Panel', function () {
     assert.ok(anchor.className.match(/\bcollapsed\b/));
   });
 
+  it('Should be aria-expanded=true', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Panel collapsable={true} expanded={true} header="Heading">Panel content</Panel>
+    );
+    var anchor = instance.getDOMNode().querySelector('.panel-title a');
+    assert.equal(anchor.getAttribute('aria-expanded'), 'true');
+  });
+
+  it('Should be aria-expanded=false', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Panel collapsable={true} expanded={false} header="Heading">Panel content</Panel>
+    );
+    var anchor = instance.getDOMNode().querySelector('.panel-title a');
+    assert.equal(anchor.getAttribute('aria-expanded'), 'false');
+  });
+
   it('Should call onSelect handler', function (done) {
-    function handleSelect (key) {
+    function handleSelect (e, key) {
       assert.equal(key, '1');
       done();
     }
