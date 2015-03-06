@@ -25,16 +25,17 @@ var Panel = React.createClass({
   },
 
   handleSelect: function(e){
-    if(this.props.onSelect) {
-      this.props.onSelect(e, this.props.eventKey)
+    e.selected = true;
+
+    if (this.props.onSelect) {
+      this.props.onSelect(e, this.props.eventKey);
     } else {
-      this.handleClickEvent(e);
+      e.preventDefault();
+    }
+
+    if (e.selected) {
       this.handleToggle();
     }
-  },
-
-  handleClickEvent: function(e){
-    e.preventDefault();
   },
 
   handleToggle: function(){
@@ -52,7 +53,6 @@ var Panel = React.createClass({
 
     return this.refs.panel.getDOMNode();
   },
-
 
   render: function () {
     var classes = this.getBsClassSet();
@@ -83,6 +83,7 @@ var Panel = React.createClass({
   renderBody: function () {
     var allChildren = this.props.children;
     var bodyElements = [];
+    var panelBodyChildren = [];
 
     function getProps() {
       return {key: bodyElements.length};
@@ -100,24 +101,23 @@ var Panel = React.createClass({
       );
     }
 
+    function maybeRenderPanelBody () {
+      if (panelBodyChildren.length === 0) {
+        return;
+      }
+
+      addPanelBody(panelBodyChildren);
+      panelBodyChildren = [];
+    }
+
     // Handle edge cases where we should not iterate through children.
-    if (!Array.isArray(allChildren) || allChildren.length == 0) {
+    if (!Array.isArray(allChildren) || allChildren.length === 0) {
       if (this.shouldRenderFill(allChildren)) {
         addPanelChild(allChildren);
       } else {
         addPanelBody(allChildren);
       }
     } else {
-      var panelBodyChildren = [];
-
-      function maybeRenderPanelBody () {
-        if (panelBodyChildren.length == 0) {
-          return;
-        }
-
-        addPanelBody(panelBodyChildren);
-        panelBodyChildren = [];
-      }
 
       allChildren.forEach(function(child) {
         if (this.shouldRenderFill(child)) {
@@ -137,7 +137,7 @@ var Panel = React.createClass({
   },
 
   shouldRenderFill: function (child) {
-    return React.isValidElement(child) && child.props.fill != null
+    return React.isValidElement(child) && child.props.fill != null;
   },
 
   renderHeading: function () {

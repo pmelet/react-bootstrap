@@ -210,7 +210,7 @@ var ComponentsPage = React.createClass({
 
                   <h3 id="panels-collapsable">Collapsable Mixin</h3>
                   <p><code>CollapsableMixin</code> can be used to create your own components with collapse functionality.</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/CollapsablePanel.js', 'utf8')} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/CollapsableParagraph.js', 'utf8')} />
                 </div>
 
                 <div className="bs-docs-section">

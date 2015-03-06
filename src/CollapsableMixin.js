@@ -9,21 +9,23 @@ var CollapsableMixin = {
   },
 
   getInitialState: function(){
-    var defaultExpanded = this.props.defaultExpanded != null
-      ? this.props.defaultExpanded
-      : this.props.expanded != null
-        ? this.props.expanded
-        : false;
+    var defaultExpanded = this.props.defaultExpanded != null ?
+      this.props.defaultExpanded :
+        this.props.expanded != null ?
+        this.props.expanded :
+        false;
 
     return {
       expanded: defaultExpanded,
       collapsing: false
-    }
+    };
   },
 
   componentWillUpdate: function(nextProps, nextState){
     var willExpanded = nextProps.expanded != null ? nextProps.expanded : nextState.expanded;
-    if (willExpanded == this.isExpanded()) return;
+    if (willExpanded === this.isExpanded()) {
+      return;
+    }
 
     // if the expanded state is being toggled, ensure node has a dimension value
     // this is needed for the animation to work and needs to be set before
@@ -48,15 +50,17 @@ var CollapsableMixin = {
     this._checkToggleCollapsing(prevProps, prevState);
 
     // check if collapsing was turned on; if so, start animation
-    this._checkStartAnimation(prevProps, prevState); 
+    this._checkStartAnimation(); 
   },
 
   // helps enable test stubs
   _afterWillUpdate: function(){
   },
 
-  _checkStartAnimation: function(prevProps, prevState){
-    if(!this.state.collapsing) return;
+  _checkStartAnimation: function(){
+    if(!this.state.collapsing) {
+      return;
+    }
 
     var node = this.getCollapsableDOMNode();
     var dimension = this.dimension();
@@ -75,10 +79,12 @@ var CollapsableMixin = {
   _checkToggleCollapsing: function(prevProps, prevState){
     var wasExpanded = prevProps.expanded != null ? prevProps.expanded : prevState.expanded;
     var isExpanded = this.isExpanded();
-    if(wasExpanded != isExpanded){
-      wasExpanded
-        ? this._handleCollapse()
-        : this._handleExpand();
+    if(wasExpanded !== isExpanded){
+      if(wasExpanded) {
+        this._handleCollapse();
+      } else {
+        this._handleExpand();
+      }
     }
   },
 
@@ -131,9 +137,9 @@ var CollapsableMixin = {
   },
 
   dimension: function(){
-    return (typeof this.getCollapsableDimension === 'function')
-      ? this.getCollapsableDimension()
-      : 'height';
+    return (typeof this.getCollapsableDimension === 'function') ?
+      this.getCollapsableDimension() :
+      'height';
   },
 
   isExpanded: function(){
