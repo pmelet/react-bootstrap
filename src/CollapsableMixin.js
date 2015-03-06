@@ -1,14 +1,6 @@
 var React = require('react');
 var TransitionEvents = require('react/lib/ReactTransitionEvents');
 
-/* This mixin keeps track of its own 'internal' expanded state.  This is to
- * help enable running css animations on the collapsable component.  The
- * expanded state /cannot/ be set /before/ the mixin has had a chance to
- * ensure that dimensions have been set on the collapsable component.  This
- * is due to how browsers interact with css transitions.  If the mixin does 
- * not share an 'expanded' state then it makes it a lot easier to handle the
- * order in which the dimension and `expanded` information is set.
-*/
 var CollapsableMixin = {
 
   propTypes: {
@@ -24,51 +16,75 @@ var CollapsableMixin = {
         : false;
 
     return {
-      __collapsableMixinExpanded__: defaultExpanded,
       expanded: defaultExpanded,
       collapsing: false
     }
   },
 
-  componentDidUpdate: function(prevProps, prevState){
-    this._setDimensionValues(prevProps, prevState);
-    this._checkToggle(prevProps, prevState);
+  componentWillUpdate: function(nextProps, nextState){
+    var willExpanded = nextProps.expanded != null ? nextProps.expanded : nextState.expanded;
+    if (willExpanded == this.isExpanded()) return;
+
+    // if the expanded state is being toggled, ensure node has a dimension value
+    // this is needed for the animation to work and needs to be set before
+    // the collapsing class is applied (after collapsing is applied the in class
+    // is removed and the node's dimension will be wrong)
+
+    var node = this.getCollapsableDOMNode();
+    var dimension = this.dimension();
+    var value = '0';
+
+    if(!willExpanded){
+      value = this.getCollapsableDimensionValue();
+    }
+
+    node.style[dimension] = value + 'px';
+
+    this._afterWillUpdate();
   },
 
-  _setDimensionValues: function(prevProps, prevState){
-    var wasExpanded = prevState.__collapsableMixinExpanded__;
+  componentDidUpdate: function(prevProps, prevState){
+    // check if expanded is being toggled; if so, set collapsing
+    this._checkToggleCollapsing(prevProps, prevState);
+
+    // check if collapsing was turned on; if so, start animation
+    this._checkStartAnimation(prevProps, prevState); 
+  },
+
+  // helps enable test stubs
+  _afterWillUpdate: function(){
+  },
+
+  _checkStartAnimation: function(prevProps, prevState){
+    if(!this.state.collapsing) return;
+
     var node = this.getCollapsableDOMNode();
     var dimension = this.dimension();
     var value = this.getCollapsableDimensionValue();
 
     // setting the dimension here starts the transition animation
-    if(!wasExpanded && this.state.collapsing) {
-      node.style[dimension] = value + 'px';
-    } else if(wasExpanded && this.state.collapsing) {
-      node.style[dimension] = '0px';
+    var result;
+    if(this.isExpanded()) {
+      result = value + 'px';
+    } else {
+      result = '0px';
     }
+    node.style[dimension] = result;
   },
 
-  _checkToggle: function(prevProps, prevState){
+  _checkToggleCollapsing: function(prevProps, prevState){
     var wasExpanded = prevProps.expanded != null ? prevProps.expanded : prevState.expanded;
     var isExpanded = this.isExpanded();
     if(wasExpanded != isExpanded){
-      this._internalToggle();
+      wasExpanded
+        ? this._handleCollapse()
+        : this._handleExpand();
     }
-  },
-
-  _internalToggle: function(){
-    this.state.__collapsableMixinExpanded__
-      ? this._handleCollapse()
-      : this._handleExpand();
   },
 
   _handleExpand: function(){
     var node = this.getCollapsableDOMNode();
     var dimension = this.dimension();
-
-    // ensure node has dimension value, needed for animation
-    node.style[dimension] = '0px';
 
     var complete = (function (){
       this._removeEndEventListener(node, complete);
@@ -83,18 +99,12 @@ var CollapsableMixin = {
     this._addEndEventListener(node, complete);
 
     this.setState({
-      __collapsableMixinExpanded__: true,
       collapsing: true
     });
   },
 
   _handleCollapse: function(){
     var node = this.getCollapsableDOMNode();
-    var dimension = this.dimension();
-    var value = this.getCollapsableDimensionValue();
-
-    // ensure node has dimension value, needed for animation
-    node.style[dimension] = value + 'px';
 
     var complete = (function (){
       this._removeEndEventListener(node, complete);
@@ -106,7 +116,6 @@ var CollapsableMixin = {
     this._addEndEventListener(node, complete);
 
     this.setState({
-      __collapsableMixinExpanded__: false,
       collapsing: true
     });
   },
@@ -144,7 +153,7 @@ var CollapsableMixin = {
 
     classes.collapsing = this.state.collapsing;
     classes.collapse = !this.state.collapsing;
-    classes['in'] = this.state.__collapsableMixinExpanded__ && !this.state.collapsing;
+    classes['in'] = this.isExpanded() && !this.state.collapsing;
 
     return classes;
   }
