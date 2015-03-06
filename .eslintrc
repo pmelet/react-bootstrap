@@ -3,8 +3,13 @@
     "browser": true,
     "node": true
   },
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "parser": "babel-eslint",
   "rules": {
     "no-underscore-dangle": 0,
+    "quotes": [1, "single", "avoid-escape"],
     "strict": 0
   }
 }
