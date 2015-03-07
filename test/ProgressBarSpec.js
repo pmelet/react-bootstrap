@@ -1,19 +1,17 @@
-/*global describe, beforeEach, afterEach, it, assert */
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ProgressBar from '../lib/ProgressBar';
 
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var ProgressBar    = require('../lib/ProgressBar');
-
-var getProgressBar = function (wrapper) {
+const getProgressBar = function (wrapper) {
   return ReactTestUtils.findRenderedDOMComponentWithClass(wrapper, 'progress-bar');
 };
 
 describe('ProgressBar', function () {
   it('Should output a progress bar with wrapper', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={0} />
     );
-    var bar = getProgressBar(instance);
+    let bar = getProgressBar(instance);
 
     assert.equal(instance.getDOMNode().nodeName, 'DIV');
     assert.ok(instance.getDOMNode().className.match(/\bprogress\b/));
@@ -22,89 +20,89 @@ describe('ProgressBar', function () {
   });
 
   it('Should have the default class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={0} bsStyle='default' />
     );
-    var bar = getProgressBar(instance);
+    let bar = getProgressBar(instance);
 
     assert.ok(bar.getDOMNode().className.match(/\bprogress-bar-default\b/));
   });
 
   it('Should have the primary class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={0} bsStyle='primary' />
     );
-    var bar = getProgressBar(instance);
+    let bar = getProgressBar(instance);
 
     assert.ok(bar.getDOMNode().className.match(/\bprogress-bar-primary\b/));
   });
 
   it('Should have the success class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={0} bsStyle='success' />
     );
-    var bar = getProgressBar(instance);
+    let bar = getProgressBar(instance);
 
     assert.ok(bar.getDOMNode().className.match(/\bprogress-bar-success\b/));
   });
 
   it('Should have the warning class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={0} bsStyle='warning' />
     );
-    var bar = getProgressBar(instance);
+    let bar = getProgressBar(instance);
 
     assert.ok(bar.getDOMNode().className.match(/\bprogress-bar-warning\b/));
   });
 
   it('Should default to min:0, max:100', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar now={5} />
     );
-    var bar = getProgressBar(instance).getDOMNode();
+    let bar = getProgressBar(instance).getDOMNode();
 
     assert.equal(bar.getAttribute('aria-valuemin'), '0');
     assert.equal(bar.getAttribute('aria-valuemax'), '100');
   });
 
   it('Should have 0% computed width', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={0} />
     );
-    var bar = getProgressBar(instance);
+    let bar = getProgressBar(instance);
 
     assert.equal(bar.getDOMNode().style.width, '0%');
   });
 
   it('Should have 10% computed width', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={1} />
     );
-    var bar = getProgressBar(instance);
+    let bar = getProgressBar(instance);
 
     assert.equal(bar.getDOMNode().style.width, '10%');
   });
 
   it('Should have 100% computed width', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={10} />
     );
-    var bar = getProgressBar(instance);
+    let bar = getProgressBar(instance);
 
     assert.equal(bar.getDOMNode().style.width, '100%');
   });
 
   it('Should have 50% computed width with non-zero min', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={1} max={11} now={6} />
     );
-    var bar = getProgressBar(instance);
+    let bar = getProgressBar(instance);
 
     assert.equal(bar.getDOMNode().style.width, '50%');
   });
 
   it('Should not have label', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={5} bsStyle='primary' />
     );
 
@@ -112,7 +110,7 @@ describe('ProgressBar', function () {
   });
 
   it('Should have label', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={5} bsStyle='primary'
         label='min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s' />
     );
@@ -121,21 +119,21 @@ describe('ProgressBar', function () {
   });
 
   it('Should have screen reader only label', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={5} bsStyle='primary' srOnly
         label='min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s' />
     );
-    var srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
+    let srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
 
     assert.equal(srLabel.getDOMNode().innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
   });
 
   it('Should have a label that is a React component', function () {
-    var customLabel = (
+    let customLabel = (
       <strong className="special-label">My label</strong>
     );
 
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={5} bsStyle='primary' label={customLabel} />
     );
 
@@ -143,22 +141,22 @@ describe('ProgressBar', function () {
   });
 
   it('Should have screen reader only label that wraps a React component', function () {
-    var customLabel = (
+    let customLabel = (
       <strong className="special-label">My label</strong>
     );
 
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={5} bsStyle='primary' label={customLabel} srOnly />
     );
 
-    var srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
-    var component = ReactTestUtils.findRenderedDOMComponentWithClass(srLabel, 'special-label');
+    let srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
+    let component = ReactTestUtils.findRenderedDOMComponentWithClass(srLabel, 'special-label');
 
     assert.ok(component);
   });
 
   it('Should show striped bar', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={1} max={11} now={6} striped />
     );
 
@@ -166,7 +164,7 @@ describe('ProgressBar', function () {
   });
 
   it('Should show animated striped bar', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={1} max={11} now={6} active />
     );
 
@@ -175,15 +173,15 @@ describe('ProgressBar', function () {
   });
 
   it('Should show stacked bars', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar>
         <ProgressBar key={1} now={50} />
         <ProgressBar key={2} now={30} />
       </ProgressBar>
     );
-    var wrapper = instance.getDOMNode();
-    var bar1 = wrapper.firstChild;
-    var bar2 = wrapper.lastChild;
+    let wrapper = instance.getDOMNode();
+    let bar1 = wrapper.firstChild;
+    let bar2 = wrapper.lastChild;
 
     assert.ok(wrapper.className.match(/\bprogress\b/));
     assert.ok(bar1.className.match(/\bprogress-bar\b/));

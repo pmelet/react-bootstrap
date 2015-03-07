@@ -1,13 +1,11 @@
-/*global describe, it, assert, afterEach */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var OverlayMixin   = require('../lib/OverlayMixin');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import OverlayMixin from '../lib/OverlayMixin';
 
 describe('OverlayMixin', function () {
-  var instance;
+  let instance;
 
-  var Overlay = React.createClass({
+  let Overlay = React.createClass({
     mixins: [OverlayMixin],
 
     render: function() {
@@ -26,7 +24,7 @@ describe('OverlayMixin', function () {
   });
 
   it('Should render overlay into container (DOMNode)', function() {
-    var container = document.createElement('div');
+    let container = document.createElement('div');
 
     instance = ReactTestUtils.renderIntoDocument(
       <Overlay container={container} overlay={<div id="test1" />} />
@@ -36,7 +34,7 @@ describe('OverlayMixin', function () {
   });
 
   it('Should render overlay into container (ReactComponent)', function() {
-    var Container = React.createClass({
+    let Container = React.createClass({
       render: function() {
         return <Overlay container={this} overlay={<div id="test1" />} />;
       }
@@ -50,7 +48,7 @@ describe('OverlayMixin', function () {
   });
 
   it('Should not render a null overlay', function() {
-    var Container = React.createClass({
+    let Container = React.createClass({
       render: function() {
         return <Overlay ref='overlay' container={this} overlay={null} />;
       }

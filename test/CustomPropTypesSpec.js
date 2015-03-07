@@ -1,8 +1,6 @@
-/*global describe, it, assert, afterEach */
-
-var React           = require('react');
-var ReactTestUtils  = require('react/lib/ReactTestUtils');
-var CustomPropTypes = require('../lib/utils/CustomPropTypes');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import CustomPropTypes from '../lib/utils/CustomPropTypes';
 
 describe('CustomPropTypes', function () {
 

@@ -1,12 +1,10 @@
-/*global describe, beforeEach, afterEach, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Badge          = require('../lib/Badge');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import Badge from '../lib/Badge';
 
 describe('Badge', function () {
   it('Should output a badge with content', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         <strong>Content</strong>
       </Badge>
@@ -15,7 +13,7 @@ describe('Badge', function () {
   });
 
   it('Should have a badge class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         Content
       </Badge>
@@ -24,8 +22,8 @@ describe('Badge', function () {
   });
 
   it('Should have a badge using a number', function () {
-    var count = 42;
-    var instance = ReactTestUtils.renderIntoDocument(
+    let count = 42;
+    let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         {count}
       </Badge>
@@ -34,7 +32,7 @@ describe('Badge', function () {
   });
 
   it('Should have a badge class pulled right', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Badge pullRight>
         Content
       </Badge>
@@ -43,7 +41,7 @@ describe('Badge', function () {
   });
 
   it('Should not have a badge class when empty', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Badge></Badge>
     );
     assert.notOk(instance.getDOMNode().className.match(/\bbadge\b/));

@@ -1,14 +1,12 @@
-/*global describe, beforeEach, afterEach, it, assert */
-
-var React           = require('react');
-var ReactTestUtils  = require('react/lib/ReactTestUtils');
-var Carousel        = require('../lib/Carousel');
-var CarouselItem    = require('../lib/CarouselItem');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import Carousel from '../lib/Carousel';
+import CarouselItem from '../lib/CarouselItem';
 
 describe('Carousel', function () {
   it('Should show the correct item', function () {
 
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1}>
         <CarouselItem ref="item1">Item 1 content</CarouselItem>
         <CarouselItem ref="item2">Item 2 content</CarouselItem>
@@ -35,7 +33,7 @@ describe('Carousel', function () {
   });
 
   it('Should handle null children', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1}>
         <CarouselItem ref="item1">Item 1 content</CarouselItem>
         {null}
@@ -60,7 +58,7 @@ describe('Carousel', function () {
       done();
     }
 
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1} onSelect={onSelect}>
         <CarouselItem ref="item1">Item 1 content</CarouselItem>
         <CarouselItem ref="item2">Item 2 content</CarouselItem>

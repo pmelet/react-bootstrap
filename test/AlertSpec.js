@@ -1,12 +1,10 @@
-/*global describe, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Alert          = require('../lib/Alert');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import Alert from '../lib/Alert';
 
 describe('Alert', function () {
   it('Should output a alert with message', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Alert>
         <strong>Message</strong>
       </Alert>
@@ -15,7 +13,7 @@ describe('Alert', function () {
   });
 
   it('Should have bsType by default', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Alert>
         Message
       </Alert>
@@ -24,8 +22,8 @@ describe('Alert', function () {
   });
 
   it('Should have dismissable style with onDismiss', function () {
-    var noOp = function () {};
-    var instance = ReactTestUtils.renderIntoDocument(
+    let noOp = function () {};
+    let instance = ReactTestUtils.renderIntoDocument(
       <Alert onDismiss={noOp}>
         Message
       </Alert>
@@ -34,10 +32,10 @@ describe('Alert', function () {
   });
 
   it('Should call onDismiss callback on dismiss click', function (done) {
-    var doneOp = function () {
+    let doneOp = function () {
       done();
     };
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Alert onDismiss={doneOp}>
         Message
       </Alert>
@@ -46,7 +44,7 @@ describe('Alert', function () {
   });
 
   it('Should call onDismiss callback on dismissAfter time', function (done) {
-    var doneOp = function () {
+    let doneOp = function () {
       done();
     };
     ReactTestUtils.renderIntoDocument(
@@ -57,7 +55,7 @@ describe('Alert', function () {
   });
 
   it('Should have a default bsStyle class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Alert>
         Message
       </Alert>
@@ -66,7 +64,7 @@ describe('Alert', function () {
   });
 
   it('Should have use bsStyle class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Alert bsStyle='danger'>
         Message
       </Alert>

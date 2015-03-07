@@ -16,9 +16,9 @@
  *  @see https://github.com/facebook/react/issues/1906
  */
 
-var React = require('react');
-var joinClasses = require('./joinClasses');
-var assign = require("./Object.assign");
+import React from 'react';
+import joinClasses from './joinClasses';
+import assign from './Object.assign';
 
 /**
  * Creates a transfer strategy that will merge prop values using the supplied
@@ -37,7 +37,7 @@ function createTransferStrategy(mergeStrategy) {
   };
 }
 
-var transferStrategyMerge = createTransferStrategy(function(a, b) {
+let transferStrategyMerge = createTransferStrategy(function(a, b) {
   // `merge` overrides the first object's (`props[key]` above) keys using the
   // second object's (`value`) keys. An object's style's existing `propA` would
   // get overridden. Flip the order here.
@@ -51,7 +51,7 @@ function emptyFunction() {}
  * NOTE: if you add any more exceptions to this list you should be sure to
  * update `cloneWithProps()` accordingly.
  */
-var TransferStrategies = {
+const TransferStrategies = {
   /**
    * Never transfer `children`.
    */
@@ -75,12 +75,12 @@ var TransferStrategies = {
  * @return {object}
  */
 function transferInto(props, newProps) {
-  for (var thisKey in newProps) {
+  for (let thisKey in newProps) {
     if (!newProps.hasOwnProperty(thisKey)) {
       continue;
     }
 
-    var transferStrategy = TransferStrategies[thisKey];
+    let transferStrategy = TransferStrategies[thisKey];
 
     if (transferStrategy && TransferStrategies.hasOwnProperty(thisKey)) {
       transferStrategy(props, thisKey, newProps[thisKey]);
@@ -103,11 +103,11 @@ function mergeProps(oldProps, newProps) {
 }
 
 
-var ReactPropTransferer = {
+let ReactPropTransferer = {
   mergeProps: mergeProps
 };
 
-var CHILDREN_PROP = 'children';
+let CHILDREN_PROP = 'children';
 
 /**
  * Sometimes you want to change the props of a child passed to you. Usually
@@ -119,7 +119,7 @@ var CHILDREN_PROP = 'children';
  * @return {object} a clone of child with props merged in.
  */
 function cloneWithProps(child, props) {
-  var newProps = ReactPropTransferer.mergeProps(props, child.props);
+  let newProps = ReactPropTransferer.mergeProps(props, child.props);
 
   // Use `child.props.children` if it is provided.
   if (!newProps.hasOwnProperty(CHILDREN_PROP) &&
@@ -128,7 +128,7 @@ function cloneWithProps(child, props) {
   }
 
   if (React.version.substr(0, 4) === '0.12'){
-    var mockLegacyFactory = function(){};
+    let mockLegacyFactory = function(){};
     mockLegacyFactory.isReactLegacyFactory = true;
     mockLegacyFactory.type = child.type;
 
@@ -140,4 +140,4 @@ function cloneWithProps(child, props) {
   return React.createElement(child.type, newProps);
 }
 
-module.exports = cloneWithProps;
+export default cloneWithProps;

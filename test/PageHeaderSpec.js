@@ -1,12 +1,10 @@
-/*global describe, beforeEach, afterEach, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var PageHeader     = require('../lib/PageHeader');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import PageHeader from '../lib/PageHeader';
 
 describe('PageHeader', function () {
   it('Should output a div with content', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <PageHeader>
         <strong>Content</strong>
       </PageHeader>
@@ -15,7 +13,7 @@ describe('PageHeader', function () {
   });
 
   it('Should have a page-header class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <PageHeader>
         Content
       </PageHeader>

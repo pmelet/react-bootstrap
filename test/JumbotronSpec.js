@@ -1,12 +1,10 @@
-/*global describe, beforeEach, afterEach, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Jumbotron      = require('../lib/Jumbotron');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import Jumbotron from '../lib/Jumbotron';
 
 describe('Jumbotron', function () {
   it('Should output a div with content', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Jumbotron>
         <strong>Content</strong>
       </Jumbotron>
@@ -15,12 +13,11 @@ describe('Jumbotron', function () {
   });
 
   it('Should have a jumbotron class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Jumbotron>
         Content
       </Jumbotron>
     );
     assert.ok(instance.getDOMNode().className.match(/\bjumbotron\b/));
   });
-
 });

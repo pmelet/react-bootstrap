@@ -1,14 +1,12 @@
-/*global describe, beforeEach, afterEach, it, assert */
-
-var React                  = require('react');
-var ReactTestUtils         = require('react/lib/ReactTestUtils');
-var TabbedArea             = require('../lib/TabbedArea');
-var TabPane                = require('../lib/TabPane');
-var ValidComponentChildren = require('../lib/utils/ValidComponentChildren');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import TabbedArea from '../lib/TabbedArea';
+import TabPane from '../lib/TabPane';
+import ValidComponentChildren from '../lib/utils/ValidComponentChildren';
 
 describe('TabbedArea', function () {
   it('Should show the correct tab', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea activeKey={1}>
         <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
         <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
@@ -22,7 +20,7 @@ describe('TabbedArea', function () {
   });
 
   it('Should only show the tabs with `TabPane.props.tab` set', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea activeKey={3}>
         <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
         <TabPane eventKey={2}>Tab 2 content</TabPane>
@@ -35,10 +33,10 @@ describe('TabbedArea', function () {
   });
 
   it('Should allow tab to have React components', function () {
-    var tabTitle = (
+    let tabTitle = (
       <strong className="special-tab">Tab 2</strong>
     );
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea activeKey={2}>
         <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
         <TabPane tab={tabTitle} eventKey={2}>Tab 2 content</TabPane>
@@ -54,8 +52,8 @@ describe('TabbedArea', function () {
       done();
     }
 
-    var tab2 = <span className="tab2">Tab2</span>;
-    var instance = ReactTestUtils.renderIntoDocument(
+    let tab2 = <span className="tab2">Tab2</span>;
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea onSelect={onSelect} activeKey={1}>
         <TabPane tab="Tab 1" eventKey='1'>Tab 1 content</TabPane>
         <TabPane tab={tab2} eventKey='2' ref="tab2">Tab 2 content</TabPane>
@@ -68,7 +66,7 @@ describe('TabbedArea', function () {
   });
 
   it('Should have children with the correct DOM properties', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea activeKey={1}>
         <TabPane tab="Tab 1" className="custom" id="pane0id" eventKey={1} ref="pane1">Tab 1 content</TabPane>
         <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
@@ -80,7 +78,7 @@ describe('TabbedArea', function () {
   });
 
   it('Should show the correct initial pane', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea defaultActiveKey={2}>
         <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
         <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
@@ -94,7 +92,7 @@ describe('TabbedArea', function () {
   });
 
   it('Should show the correct first tab with no active key value', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea>
         <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
         <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
@@ -108,15 +106,15 @@ describe('TabbedArea', function () {
   });
 
   it('Should show the correct first tab with `React.Children.map` children values', function () {
-    var panes = [
+    let panes = [
       <div>Tab 1 content</div>,
       <div>Tab 2 content</div>
     ];
-    var paneComponents = React.Children.map(panes, function(child, index) {
+    let paneComponents = React.Children.map(panes, function(child, index) {
       return <TabPane eventKey={index} tab={'Tab #' + index}>{child}</TabPane>;
     });
 
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea>
         {paneComponents}
         {null}
@@ -127,8 +125,8 @@ describe('TabbedArea', function () {
   });
 
   it('Should show the correct tab when selected', function () {
-    var tab1 = <span className="tab1">Tab 1</span>;
-    var instance = ReactTestUtils.renderIntoDocument(
+    let tab1 = <span className="tab1">Tab 1</span>;
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea defaultActiveKey={2} animation={false}>
         <TabPane tab={tab1} eventKey={1} ref="pane1">Tab 1 content</TabPane>
         <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
@@ -145,7 +143,7 @@ describe('TabbedArea', function () {
   });
 
   it('Should pass default bsStyle (of "tabs") to Nav', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea defaultActiveKey={1} animation={false}>
         <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
         <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
@@ -156,7 +154,7 @@ describe('TabbedArea', function () {
   });
 
   it('Should pass bsStyle to Nav', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea bsStyle="pills" defaultActiveKey={1} animation={false}>
         <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
         <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>

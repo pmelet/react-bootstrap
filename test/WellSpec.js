@@ -1,12 +1,10 @@
-/*global describe, beforeEach, afterEach, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Well           = require('../lib/Well');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import Well from '../lib/Well';
 
 describe('Well', function () {
   it('Should output a well with content', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Well>
         <strong>Content</strong>
       </Well>
@@ -15,7 +13,7 @@ describe('Well', function () {
   });
 
   it('Should have a well class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Well>
         Content
       </Well>
@@ -24,12 +22,11 @@ describe('Well', function () {
   });
 
   it('Should accept bsSize arguments', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Well bsSize='small'>
         Content
       </Well>
-      );
-      assert.ok(instance.getDOMNode().className.match(/\bwell-sm\b/));
-    });
-
+    );
+    assert.ok(instance.getDOMNode().className.match(/\bwell-sm\b/));
+  });
 });

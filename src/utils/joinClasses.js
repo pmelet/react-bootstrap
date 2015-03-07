@@ -11,8 +11,6 @@
  * https://github.com/facebook/react/blob/v0.12.0/PATENTS
  */
 
-"use strict";
-
 /**
  * Combines multiple className strings into one.
  * http://jsperf.com/joinclasses-args-vs-array
@@ -24,10 +22,10 @@ function joinClasses(className/*, ... */) {
   if (!className) {
     className = '';
   }
-  var nextClass;
-  var argLength = arguments.length;
+  let nextClass;
+  let argLength = arguments.length;
   if (argLength > 1) {
-    for (var ii = 1; ii < argLength; ii++) {
+    for (let ii = 1; ii < argLength; ii++) {
       nextClass = arguments[ii];
       if (nextClass) {
         className = (className ? className + ' ' : '') + nextClass;
@@ -37,4 +35,4 @@ function joinClasses(className/*, ... */) {
   return className;
 }
 
-module.exports = joinClasses;
+export default joinClasses;

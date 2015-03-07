@@ -27,7 +27,7 @@
  * @return string       Renderable space-separated CSS className.
  */
 function cx(classNames) {
-  if (typeof classNames == 'object') {
+  if (typeof classNames === 'object') {
     return Object.keys(classNames).filter(function(className) {
       return classNames[className];
     }).join(' ');
@@ -36,4 +36,4 @@ function cx(classNames) {
   }
 }
 
-module.exports = cx;
+export default cx;

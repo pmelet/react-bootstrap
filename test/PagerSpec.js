@@ -1,13 +1,11 @@
-/*global describe, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Pager          = require('../lib/Pager');
-var PageItem       = require('../lib/PageItem');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import Pager from '../lib/Pager';
+import PageItem from '../lib/PageItem';
 
 describe('Pager', function () {
   it('Should output a unordered list as root element with class "pager"', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Pager/>
     );
     assert.equal(instance.getDOMNode().nodeName, 'UL');
@@ -15,7 +13,7 @@ describe('Pager', function () {
   });
 
   it('Should allow "PageItem" as child element', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Pager>
         <PageItem href="#">Top</PageItem>
       </Pager>
@@ -25,7 +23,7 @@ describe('Pager', function () {
   });
 
   it('Should allow multiple "PageItem" as child elements', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Pager>
         <PageItem previous href="#">Previous</PageItem>
         <PageItem disabled href="#">Top</PageItem>
@@ -40,10 +38,10 @@ describe('Pager', function () {
   it('Should call "onSelect" when item is clicked', function (done) {
     function handleSelect(key, href) {
       assert.equal(key, 2);
-      assert.equal(href, "#next");
+      assert.equal(href, '#next');
       done();
     }
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Pager onSelect={handleSelect}>
         <PageItem eventKey={1} ref="item1" href="#prev">Previous</PageItem>
         <PageItem eventKey={2} ref="item2" href="#next">Next</PageItem>

@@ -1,14 +1,12 @@
-/*global describe, beforeEach, afterEach, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var DropdownButton = require('../lib/DropdownButton');
-var MenuItem       = require('../lib/MenuItem');
-var DropdownMenu   = require('../lib/DropdownMenu');
-var Button         = require('../lib/Button');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import DropdownButton from '../lib/DropdownButton';
+import MenuItem from '../lib/MenuItem';
+import DropdownMenu from '../lib/DropdownMenu';
+import Button from '../lib/Button';
 
 describe('DropdownButton', function () {
-  var instance;
+  let instance;
 
   afterEach(function() {
     if (instance && ReactTestUtils.isCompositeComponent(instance) && instance.isMounted()) {
@@ -24,7 +22,7 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
+    let button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group\b/));
     assert.ok(instance.getDOMNode().className.match(/\btest-class\b/));
     assert.ok(button.className.match(/\bbtn\b/));
@@ -43,8 +41,8 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    var menu = ReactTestUtils.findRenderedComponentWithType(instance, DropdownMenu);
-    var allMenuItems = ReactTestUtils.scryRenderedComponentsWithType(menu, MenuItem);
+    let menu = ReactTestUtils.findRenderedComponentWithType(instance, DropdownMenu);
+    let allMenuItems = ReactTestUtils.scryRenderedComponentsWithType(menu, MenuItem);
     assert.equal(allMenuItems.length, 2);
   });
 
@@ -56,7 +54,7 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
+    let button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.ok(button.className.match(/\bbtn-primary\b/));
     assert.equal(button.getAttribute('id'), 'testId');
     assert.ok(button.disabled);
@@ -98,7 +96,7 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    var menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
+    let menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
     assert.equal(menuItems.length, 2);
     ReactTestUtils.SimulateNative.click(
       ReactTestUtils.findRenderedDOMComponentWithTag(menuItems[1], 'a')
@@ -119,7 +117,7 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    var menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
+    let menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
     assert.equal(menuItems.length, 2);
     ReactTestUtils.SimulateNative.click(
       ReactTestUtils.findRenderedDOMComponentWithTag(menuItems[1], 'a')
@@ -134,7 +132,7 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    var menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
+    let menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
     assert.notOk(menuItems[0].props.onSelect);
   });
 
@@ -151,7 +149,7 @@ describe('DropdownButton', function () {
     });
 
     it('should close on click', function () {
-      var evt = document.createEvent('HTMLEvents');
+      let evt = document.createEvent('HTMLEvents');
       evt.initEvent('click', true, true);
       document.documentElement.dispatchEvent(evt);
 
@@ -167,8 +165,8 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    var li = instance.getDOMNode();
-    var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
+    let li = instance.getDOMNode();
+    let button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.equal(li.nodeName, 'LI');
     assert.ok(li.className.match(/\bdropdown\b/));
     assert.ok(li.className.match(/\btest-class\b/));
@@ -186,8 +184,8 @@ describe('DropdownButton', function () {
         </DropdownButton>
     );
 
-    var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
-    var carets = button.getElementsByClassName('caret');
+    let button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
+    let carets = button.getElementsByClassName('caret');
     assert.equal(carets.length, 1);
   });
 
@@ -199,8 +197,8 @@ describe('DropdownButton', function () {
         </DropdownButton>
     );
 
-    var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
-    var carets = button.getElementsByClassName('caret');
+    let button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
+    let carets = button.getElementsByClassName('caret');
     assert.equal(carets.length, 0);
   });
 });

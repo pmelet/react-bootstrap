@@ -1,14 +1,12 @@
-/*global describe, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var ButtonToolbar  = require('../lib/ButtonToolbar');
-var ButtonGroup    = require('../lib/ButtonGroup');
-var Button         = require('../lib/Button');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ButtonToolbar from '../lib/ButtonToolbar';
+import ButtonGroup from '../lib/ButtonGroup';
+import Button from '../lib/Button';
 
 describe('ButtonToolbar', function () {
   it('Should output a button toolbar', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ButtonToolbar>
         <ButtonGroup>
           <Button>

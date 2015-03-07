@@ -1,10 +1,8 @@
-/*global describe, beforeEach, afterEach, it, assert */
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import BootstrapMixin from '../lib/BootstrapMixin';
 
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var BootstrapMixin = require('../lib/BootstrapMixin');
-
-var Component;
+let Component;
 
 describe('BootstrapMixin', function () {
   beforeEach(function() {
@@ -19,7 +17,7 @@ describe('BootstrapMixin', function () {
 
   describe('#getBsClassSet', function () {
     it('should return blank', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component>
           content
         </Component>
@@ -28,7 +26,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "col"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='column'>
           content
         </Component>
@@ -37,7 +35,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button'>
           content
         </Component>
@@ -46,7 +44,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn-group"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button-group'>
           content
         </Component>
@@ -55,7 +53,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "label"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='label'>
           content
         </Component>
@@ -64,7 +62,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "alert"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='alert'>
           content
         </Component>
@@ -73,7 +71,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "input-group"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='input-group'>
           content
         </Component>
@@ -82,7 +80,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "form"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='form'>
           content
         </Component>
@@ -91,7 +89,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "panel"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='panel'>
           content
         </Component>
@@ -100,7 +98,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn btn-default"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button' bsStyle='default'>
           content
         </Component>
@@ -109,7 +107,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn btn-primary"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button' bsStyle='primary'>
           content
         </Component>
@@ -118,7 +116,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn btn-success"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button' bsStyle='success'>
           content
         </Component>
@@ -127,7 +125,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn btn-info"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button' bsStyle='info'>
           content
         </Component>
@@ -136,7 +134,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn btn-link"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button' bsStyle='link'>
           content
         </Component>
@@ -145,7 +143,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn btn-inline"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button' bsStyle='inline'>
           content
         </Component>
@@ -154,7 +152,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn btn-lg"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button' bsSize='large'>
           content
         </Component>
@@ -163,7 +161,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn btn-md"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button' bsSize='medium'>
           content
         </Component>
@@ -172,7 +170,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn btn-sm"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button' bsSize='small'>
           content
         </Component>
@@ -181,7 +179,7 @@ describe('BootstrapMixin', function () {
     });
 
     it('should return "btn btn-xs"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
+      let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button' bsSize='xsmall'>
           content
         </Component>

@@ -1,13 +1,11 @@
-/*global describe, beforeEach, afterEach, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Label          = require('../lib/Label');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import Label from '../lib/Label';
 
 describe('Label', function () {
 
   it('Should output a label with message', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Label>
         <strong>Message</strong>
       </Label>
@@ -16,7 +14,7 @@ describe('Label', function () {
   });
 
   it('Should have bsClass by default', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Label>
         Message
       </Label>
@@ -25,7 +23,7 @@ describe('Label', function () {
   });
 
   it('Should have bsStyle by default', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Label>
         Message
       </Label>

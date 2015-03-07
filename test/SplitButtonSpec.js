@@ -1,13 +1,11 @@
-/*global document, describe, beforeEach, afterEach, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var SplitButton    = require('../lib/SplitButton');
-var MenuItem       = require('../lib/MenuItem');
-var Button       = require('../lib/Button');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import SplitButton from '../lib/SplitButton';
+import MenuItem from '../lib/MenuItem';
+import Button from '../lib/Button';
 
 describe('SplitButton', function () {
-  var instance;
+  let instance;
   afterEach(function() {
     if (instance && ReactTestUtils.isCompositeComponent(instance) && instance.isMounted()) {
       React.unmountComponentAtNode(instance.getDOMNode().parent);
@@ -22,8 +20,8 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    var button = instance.refs.button.getDOMNode();
-    var dropdownButton = instance.refs.dropdownButton.getDOMNode();
+    let button = instance.refs.button.getDOMNode();
+    let dropdownButton = instance.refs.dropdownButton.getDOMNode();
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group\b/));
     assert.ok(button.className.match(/\bbtn\b/));
     assert.equal(button.nodeName, 'BUTTON');
@@ -43,7 +41,7 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    var menu = instance.refs.menu.getDOMNode();
+    let menu = instance.refs.menu.getDOMNode();
     assert.ok(menu.className.match(/\bdropdown-menu\b/));
     assert.equal(menu.getAttribute('role'), 'menu');
     assert.equal(menu.firstChild.nodeName, 'LI');
@@ -53,7 +51,7 @@ describe('SplitButton', function () {
   });
 
   it('Should pass dropdownTitle to dropdown button', function () {
-    var CustomTitle = React.createClass({ render: function() { return <span />; } });
+    let CustomTitle = React.createClass({ render: function() { return <span />; } });
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title={<CustomTitle />} dropdownTitle={<CustomTitle />}>
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
@@ -73,7 +71,7 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    var button = instance.refs.button.getDOMNode();
+    let button = instance.refs.button.getDOMNode();
     assert.ok(button.className.match(/\bbtn-primary\b/));
   });
 
@@ -85,10 +83,10 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    var button = instance.refs.button.getDOMNode();
+    let button = instance.refs.button.getDOMNode();
     assert.ok(button.disabled);
-    var dropdownButton = instance.refs.dropdownButton.getDOMNode();
-    assert.ok(button.disabled);
+    let dropdownButton = instance.refs.dropdownButton.getDOMNode();
+    assert.ok(dropdownButton.disabled);
   });
 
   it('Should pass id to button group', function () {
@@ -139,7 +137,7 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    var menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
+    let menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
     assert.equal(menuItems.length, 2);
     ReactTestUtils.SimulateNative.click(
       ReactTestUtils.findRenderedDOMComponentWithTag(menuItems[1], 'a')
@@ -147,7 +145,7 @@ describe('SplitButton', function () {
   });
 
   it('Should have dropup class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" dropdownTitle="New title" dropup>
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
@@ -158,7 +156,7 @@ describe('SplitButton', function () {
   });
 
   it('Should pass pullRight prop to menu', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" dropdownTitle="New title" pullRight>
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
@@ -169,15 +167,15 @@ describe('SplitButton', function () {
   });
 
   it('Should set target attribute on anchor', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" dropdownTitle="New title" href="/some/unique-thing/" target="_blank">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
       </SplitButton>
     );
 
-    var anchors = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
+    let anchors = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
     assert.equal(anchors.length, 2);
-    var linkElement = anchors[0].getDOMNode();
+    let linkElement = anchors[0].getDOMNode();
     assert.equal(linkElement.target, '_blank');
   });
 
@@ -186,13 +184,13 @@ describe('SplitButton', function () {
       assert.equal(target, '_blank');
       done();
     }
-    var instance = ReactTestUtils.renderIntoDocument(
+    instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" dropdownTitle="New title" href="/some/unique-thing/" target="_blank" onClick={handleClick}>
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
       </SplitButton>
     );
 
-    var buttons = ReactTestUtils.scryRenderedComponentsWithType(instance, Button);
+    let buttons = ReactTestUtils.scryRenderedComponentsWithType(instance, Button);
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(buttons[0], 'a'));
   });
 
@@ -209,7 +207,7 @@ describe('SplitButton', function () {
     });
 
     it('should close when button is clicked', function () {
-      var evt = document.createEvent('HTMLEvents');
+      let evt = document.createEvent('HTMLEvents');
       evt.initEvent('click', true, true);
       document.documentElement.dispatchEvent(evt);
 

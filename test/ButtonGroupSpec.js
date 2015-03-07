@@ -1,13 +1,11 @@
-/*global describe, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var ButtonGroup    = require('../lib/ButtonGroup');
-var Button         = require('../lib/Button');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ButtonGroup from '../lib/ButtonGroup';
+import Button from '../lib/Button';
 
 describe('ButtonGroup', function () {
   it('Should output a button group', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup>
         <Button>
           Title
@@ -19,7 +17,7 @@ describe('ButtonGroup', function () {
   });
 
   it('Should add size', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup bsSize='large'>
         <Button>
           Title
@@ -30,7 +28,7 @@ describe('ButtonGroup', function () {
   });
 
   it('Should add vertical variation', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup vertical>
         <Button>
           Title
@@ -41,7 +39,7 @@ describe('ButtonGroup', function () {
   });
 
   it('Should add justified variation', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup justified>
         <Button>
           Title

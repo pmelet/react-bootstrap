@@ -1,12 +1,10 @@
-/*global describe, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Button         = require('../lib/Button');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import Button from '../lib/Button';
 
 describe('Button', function () {
   it('Should output a button', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button>
         Title
       </Button>
@@ -15,7 +13,7 @@ describe('Button', function () {
   });
 
   it('Should output a component with button classes', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button componentClass='input'>
         Title
       </Button>
@@ -25,7 +23,7 @@ describe('Button', function () {
   });
 
   it('Should have type=button by default', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button>
         Title
       </Button>
@@ -34,7 +32,7 @@ describe('Button', function () {
   });
 
   it('Should show the type if passed one', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button type='submit'>
         Title
       </Button>
@@ -43,8 +41,8 @@ describe('Button', function () {
   });
 
   it('Should output an anchor if called with a href', function () {
-    var href = '/url';
-    var instance = ReactTestUtils.renderIntoDocument(
+    let href = '/url';
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button href={href}>
         Title
       </Button>
@@ -54,8 +52,8 @@ describe('Button', function () {
   });
 
   it('Should output an input if called with a href and an input component', function () {
-    var href = '/url';
-    var instance = ReactTestUtils.renderIntoDocument(
+    let href = '/url';
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button href={href} componentClass='input'>
         Title
       </Button>
@@ -65,8 +63,8 @@ describe('Button', function () {
   });
 
   it('Should output an anchor if called with a target', function () {
-    var target = '_blank';
-    var instance = ReactTestUtils.renderIntoDocument(
+    let target = '_blank';
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button target={target}>
         Title
       </Button>
@@ -76,10 +74,10 @@ describe('Button', function () {
   });
 
   it('Should call onClick callback', function (done) {
-    var doneOp = function () {
+    let doneOp = function () {
       done();
     };
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button onClick={doneOp}>
         Title
       </Button>
@@ -88,7 +86,7 @@ describe('Button', function () {
   });
 
   it('Should be disabled', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button disabled>
         Title
       </Button>
@@ -97,7 +95,7 @@ describe('Button', function () {
   });
 
   it('Should be disabled link', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button disabled href='#'>
         Title
       </Button>
@@ -106,7 +104,7 @@ describe('Button', function () {
   });
 
   it('Should have block class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button block>
         Title
       </Button>
@@ -115,7 +113,7 @@ describe('Button', function () {
   });
 
   it('Should apply bsStyle class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button bsStyle='danger'>
         Title
       </Button>
@@ -124,7 +122,7 @@ describe('Button', function () {
   });
 
   it('Should honour additional classes passed in, adding not overriding', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button className="bob" bsStyle="danger">
         Title
       </Button>
@@ -134,7 +132,7 @@ describe('Button', function () {
   });
 
   it('Should default to bsStyle="default"', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button bsStyle='default'>
         Title
       </Button>
@@ -143,7 +141,7 @@ describe('Button', function () {
   });
 
   it('Should be active', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button active>
         Title
       </Button>
@@ -152,27 +150,27 @@ describe('Button', function () {
   });
 
   it('Should render an anchor in a list item when in a nav', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button navItem active>
         Title
       </Button>
     );
 
-    var li = instance.getDOMNode();
-    var anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+    let li = instance.getDOMNode();
+    let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(li.nodeName, 'LI');
     assert.ok(li.className.match(/\bactive\b/));
     assert.ok(anchor.props.href, '#');
   });
 
   it('Should render an anchor when in a navDropdown', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Button navDropdown>
         Title
       </Button>
     );
 
-    var anchor = instance.getDOMNode();
+    let anchor = instance.getDOMNode();
     assert.equal(anchor.nodeName, 'A');
     assert.ok(anchor.getAttribute('href'), '#');
   });

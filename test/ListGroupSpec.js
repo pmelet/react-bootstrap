@@ -1,22 +1,20 @@
-/*global describe, beforeEach, afterEach, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var ListGroup      = require('../lib/ListGroup');
-var ListGroupItem  = require('../lib/ListGroupItem');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ListGroup from '../lib/ListGroup';
+import ListGroupItem from '../lib/ListGroupItem';
 
 describe('ListGroup', function () {
 
   it('Should output a "div" with the class "list-group"', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ListGroup/>
     );
-    assert.equal(instance.getDOMNode().nodeName, "DIV");
+    assert.equal(instance.getDOMNode().nodeName, 'DIV');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
   });
 
   it('Should support "ListGroupItem" childs', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <ListGroup>
         <ListGroupItem ref="child1">1st Child</ListGroupItem>
         <ListGroupItem ref="child2">2nd Child</ListGroupItem>

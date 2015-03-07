@@ -1,19 +1,17 @@
-/*global describe, it, assert */
-
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var TabPane        = require('../lib/TabPane');
+import React from 'react';
+import ReactTestUtils from 'react/lib/ReactTestUtils';
+import TabPane from '../lib/TabPane';
 
 describe('TabPane', function () {
   it('Should have class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabPane>Item content</TabPane>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab-pane'));
   });
 
   it('Should add active class', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <TabPane active={true}>Item content</TabPane>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
