@@ -40,8 +40,10 @@ var Col = React.createClass({
       var prop = size;
       var classPart = size + '-';
 
-      if (this.props[prop]) {
+      if (this.props[prop] > 0) {
         classes['col-' + classPart + this.props[prop]] = true;
+      } else if (this.props[prop] === 0) {
+        classes['hidden-' + classPart] = true;
       }
 
       prop = size + 'Offset';
